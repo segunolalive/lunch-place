@@ -1,25 +1,31 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { useState } from 'react';
+import { Container, SearchBox , VenueType, Venues} from './components';
+import { VenueProvider, useVenues, } from "./hooks";
+
+type Group = {
+  items: VenueType[]
+}
+
+type SearchResponse = {
+  response: {
+    groups: Group[]
+  }
+}
 
 function App() {
+  const [searchText, setSearchText] = useState('')
+  const { data } = useVenues<SearchResponse>(searchText)
+
+  const venues = data?.response?.groups?.[0]?.items
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <VenueProvider>
+      <Container>
+        <h1>Lunchplace</h1>
+        <SearchBox initialValue={searchText} searchFn={setSearchText} />
+        { venues &&
+          <Venues venues={data?.response?.groups?.[0]?.items} />}
+      </Container>
+    </VenueProvider>
   );
 }
 
