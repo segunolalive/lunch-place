@@ -34,7 +34,7 @@ const summarizeVotes = (votes: [string, string][]) => {
   return { summary, max }
 }
 
-export function Venues({ venues }: VenueProps) {
+export function VotingTable({ venues }: VenueProps) {
   const [detailsStatus, setDetailsStatus] = useState<REQUEST_STATUSES>(
     REQUEST_STATUSES.IDLE
   )

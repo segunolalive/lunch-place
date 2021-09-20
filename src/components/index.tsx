@@ -1,3 +1,3 @@
 export * from './Primitives'
 export * from './SearchBox'
-export * from './Venues'
+export * from './VotingTable'

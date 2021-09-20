@@ -1,6 +1,6 @@
-import { useState } from 'react';
-import { Container, SearchBox , VenueType, Venues} from './components';
-import { VenueProvider, useVenues, } from "./hooks";
+import { useState } from 'react'
+import { Container, SearchBox, VenueType, VotingTable } from './components'
+import { useVenues } from './hooks'
 
 type Group = {
   items: VenueType[]
@@ -18,15 +18,12 @@ function App() {
 
   const venues = data?.response?.groups?.[0]?.items
   return (
-    <VenueProvider>
-      <Container>
-        <h1>Lunchplace</h1>
-        <SearchBox initialValue={searchText} searchFn={setSearchText} />
-        { venues &&
-          <Venues venues={data?.response?.groups?.[0]?.items} />}
-      </Container>
-    </VenueProvider>
-  );
+    <Container>
+      <h1>Lunchplace</h1>
+      <SearchBox initialValue={searchText} searchFn={setSearchText} />
+      {venues && <VotingTable venues={data?.response?.groups?.[0]?.items} />}
+    </Container>
+  )
 }
 
-export default App;
+export default App

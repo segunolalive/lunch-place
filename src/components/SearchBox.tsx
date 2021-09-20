@@ -1,12 +1,10 @@
 import { useState, ChangeEvent, FormEvent } from 'react'
-import { Button, Form, SRText, SearchInput } from './Primitives';
-
+import { Button, Form, SRText, SearchInput } from './Primitives'
 
 type SearchProps = {
   initialValue?: string
   searchFn: (text: string) => void
 }
-
 
 export function SearchBox({ initialValue = '', searchFn }: SearchProps) {
   const [text, setText] = useState(initialValue)
@@ -17,7 +15,6 @@ export function SearchBox({ initialValue = '', searchFn }: SearchProps) {
 
   const onSubmit = (event: FormEvent<HTMLFormElement>): void => {
     event.preventDefault()
-    console.log("SUBMITTING ========")
     searchFn(text)
   }
 
